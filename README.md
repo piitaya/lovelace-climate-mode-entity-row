@@ -44,7 +44,7 @@ resources:
 ```yaml
 type: entities
   - entity: climate.thermostat_kitchen
-    type: 'custom:thermostat-card'
+    type: 'custom:climate-mode-entity-row'
     modes:
       - icon: 'mdi:snowflake'
         hvac_mode: 'off'
