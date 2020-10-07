@@ -106,4 +106,4 @@
   }
 
   customElements.define("climate-mode-entity-row", ClimateModeEntity);
-})(window.LitElement || Object.getPrototypeOf(customElements.get("hui-view")));
+})(window.LitElement || Object.getPrototypeOf(customElements.get('hui-masonry-view') || customElements.get('hui-view')));
