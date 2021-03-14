@@ -69,6 +69,8 @@ type: entities
 entities:
   - entity: climate.thermostat_kitchen
     type: 'custom:climate-mode-entity-row'
+    name: My Thermostat
+    icon: 'mdi:home'
     modes:
       - hvac_mode: 'off'
         icon: 'mdi:snowflake'
