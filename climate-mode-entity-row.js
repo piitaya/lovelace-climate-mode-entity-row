@@ -79,7 +79,7 @@
         <ha-icon
           style="${isActive ? style : ""}"
           class="${isActive ? "active" : ""}"
-          icon="${mode.icon || defaultIcon}"
+          icon="${mode.icon || defaultIcon || "mdi-thermostat"}"
           @click="${onClick}"
         ></ha-icon>
       `;
