@@ -1,13 +1,29 @@
-(LitElement => {
+((LitElement) => {
   const html = LitElement.prototype.html;
   const css = LitElement.prototype.css;
+
+  const defaultColors = {
+    heat: "#FF8100",
+    off: "#ef5350",
+    away: "#90CAF9",
+    eco: "#66bb6a",
+    comfort: "#FFC107",
+  };
+
+  const defaultIcons = {
+    heat: "mdi:fire",
+    off: "mdi:power",
+    away: "mdi:snowflake",
+    eco: "mdi:leaf",
+    comfort: "mdi:weather-sunny",
+  };
 
   class ClimateModeEntity extends LitElement {
     static get properties() {
       return {
         _hass: {},
         _config: {},
-        state: {}
+        state: {},
       };
     }
 
@@ -40,7 +56,7 @@
       return html`
         <hui-generic-entity-row .hass="${hass}" .config="${config}">
           <div class="flex">
-            ${config.modes.map(mode => this.renderMode(mode))}
+            ${config.modes.map((mode) => this.renderMode(mode))}
           </div>
         </hui-generic-entity-row>
       `;
@@ -54,13 +70,16 @@
 
       const onClick = () => this.setMode(mode);
 
-      const style = mode.color ? `color: ${mode.color}` : "";
-    
+      const defaultColor = defaultColors[mode.preset_mode || mode.hvac_mode];
+      const defaultIcon = defaultIcons[mode.preset_mode || mode.hvac_mode];
+      const color = mode.color || defaultColor;
+      const style = color ? `color: ${color}` : "";
+
       return html`
         <ha-icon
           style="${isActive ? style : ""}"
           class="${isActive ? "active" : ""}"
-          icon="${mode.icon}"
+          icon="${mode.icon || defaultIcon}"
           @click="${onClick}"
         ></ha-icon>
       `;
@@ -70,14 +89,14 @@
       if (mode.hvac_mode) {
         this._hass.callService("climate", "set_hvac_mode", {
           entity_id: this._config.entity,
-          hvac_mode: mode.hvac_mode
+          hvac_mode: mode.hvac_mode,
         });
       }
 
       if (mode.preset_mode) {
         this._hass.callService("climate", "set_preset_mode", {
           entity_id: this._config.entity,
-          preset_mode: mode.preset_mode
+          preset_mode: mode.preset_mode,
         });
       }
     }
@@ -100,10 +119,15 @@
       this.state = {
         entity,
         hvac_mode,
-        preset_mode
+        preset_mode,
       };
     }
   }
 
   customElements.define("climate-mode-entity-row", ClimateModeEntity);
-})(window.LitElement || Object.getPrototypeOf(customElements.get('hui-masonry-view') || customElements.get('hui-view')));
+})(
+  window.LitElement ||
+    Object.getPrototypeOf(
+      customElements.get("hui-masonry-view") || customElements.get("hui-view")
+    )
+);
