@@ -64,9 +64,10 @@
 
     renderMode(mode) {
       const isActive =
-        ((!mode.preset_mode || mode.preset_mode === this.state.preset_mode) &&
-          !mode.hvac_mode) ||
-        mode.hvac_mode === this.state.hvac_mode;
+        (!mode.preset_mode || mode.preset_mode === this.state.preset_mode) &&
+        (!mode.hvac_mode || mode.hvac_mode === this.state.hvac_mode) &&
+        (!mode.fan_mode || mode.fan_mode === this.state.fan_mode) &&
+        (!mode.swing_mode || mode.swing_mode === this.state.swing_mode);
 
       const onClick = () => this.setMode(mode);
 
@@ -99,6 +100,20 @@
           preset_mode: mode.preset_mode,
         });
       }
+
+      if (mode.fan_mode) {
+        this._hass.callService("climate", "set_fan_mode", {
+          entity_id: this._config.entity,
+          fan_mode: mode.fan_mode,
+        });
+      }
+
+      if (mode.swing_mode) {
+        this._hass.callService("climate", "set_swing_mode", {
+          entity_id: this._config.entity,
+          swing_mode: mode.swing_mode,
+        });
+      }
     }
 
     setConfig(config) {
@@ -115,11 +130,15 @@
 
       const hvac_mode = entity.state;
       const preset_mode = entity.attributes.preset_mode;
+      const fan_mode = entity.attributes.fan_mode;
+      const swing_mode = entity.attributes.swing_mode;
 
       this.state = {
         entity,
         hvac_mode,
         preset_mode,
+        fan_mode,
+        swing_mode,
       };
     }
   }
