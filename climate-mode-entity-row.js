@@ -64,14 +64,10 @@
 
     renderMode(mode) {
       const isActive =
-        (mode.preset_mode !== undefined &&
-          mode.preset_mode === this.state.preset_mode) ||
-        (mode.hvac_mode !== undefined &&
-          mode.hvac_mode === this.state.hvac_mode) ||
-        (mode.fan_mode !== undefined &&
-          mode.fan_mode === this.state.fan_mode) ||
-        (mode.swing_mode !== undefined &&
-          mode.swing_mode === this.state.swing_mode);
+        (!mode.preset_mode || mode.preset_mode === this.state.preset_mode) &&
+        (!mode.hvac_mode || mode.hvac_mode === this.state.hvac_mode) &&
+        (!mode.fan_mode || mode.fan_mode === this.state.fan_mode) &&
+        (!mode.swing_mode || mode.swing_mode === this.state.swing_mode);
 
       const onClick = () => this.setMode(mode);
 
