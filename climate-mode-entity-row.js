@@ -67,7 +67,9 @@
         (!mode.preset_mode || mode.preset_mode === this.state.preset_mode) &&
         (!mode.hvac_mode || mode.hvac_mode === this.state.hvac_mode) &&
         (!mode.fan_mode || mode.fan_mode === this.state.fan_mode) &&
-        (!mode.swing_mode || mode.swing_mode === this.state.swing_mode);
+        (!mode.swing_mode || mode.swing_mode === this.state.swing_mode) &&
+        (mode.temperature == null ||
+          mode.temperature === this.state.temperature);
 
       const onClick = () => this.setMode(mode);
 
@@ -114,6 +116,13 @@
           swing_mode: mode.swing_mode,
         });
       }
+
+      if (mode.temperature != null) {
+        this._hass.callService("climate", "set_temperature", {
+          entity_id: this._config.entity,
+          temperature: mode.temperature,
+        });
+      }
     }
 
     setConfig(config) {
@@ -132,6 +141,7 @@
       const preset_mode = entity.attributes.preset_mode;
       const fan_mode = entity.attributes.fan_mode;
       const swing_mode = entity.attributes.swing_mode;
+      const temperature = entity.attributes.temperature;
 
       this.state = {
         entity,
@@ -139,6 +149,7 @@
         preset_mode,
         fan_mode,
         swing_mode,
+        temperature,
       };
     }
   }
