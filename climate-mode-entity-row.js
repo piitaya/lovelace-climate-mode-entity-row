@@ -92,28 +92,15 @@
       const color = mode.color || defaultColor;
       const style = color ? `color: ${color}` : "";
 
-      const show_icon = this._config.show_icon
-
       return html`
         <ha-icon
           style="${isActive ? style : ""}"
           class="${isActive ? "active" : ""}"
-
-          ${show_icon
-            ? html` 
-            icon="${mode.icon || defaultIcon || "mdi-thermostat"}"
-            `
-            : ""}
+          icon="${mode.icon || defaultIcon || "mdi-thermostat"}"
           @click="${onClick}"
         ></ha-icon>
       `;
     }
-
-    {showSlider
-      ? html` 
-
-      `
-          : ""}
 
     setMode(mode) {
       if (mode.hvac_mode) {
