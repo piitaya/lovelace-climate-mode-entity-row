@@ -38,6 +38,11 @@
           justify-content: space-between;
           align-items: center;
         }
+        .state {
+          min-width: 45px;
+          text-align: end;
+          margin-left: 5px;
+        }
         ha-icon {
           cursor: pointer;
           color: var(--secondary-text-color);
@@ -65,7 +70,9 @@
           <div class="flex">
             ${config.modes.map((mode) => this.renderMode(mode))}
           </div>
-          <div class="flex">${stateObj.attributes.current_temperature || stateObj.entity_id}</div>
+          <div class="state">
+            ${stateObj.attributes.current_temperature || stateObj.entity_id}
+          </div>
         </hui-generic-entity-row>
       `;
     }
