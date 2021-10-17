@@ -72,6 +72,7 @@
           </div>
           <div class="state">
             ${stateObj.attributes.current_temperature || stateObj.entity_id}
+            ${this._hass.config.unit_system.temperature || stateObj.entity_id}
           </div>
         </hui-generic-entity-row>
       `;
