@@ -39,7 +39,7 @@
           align-items: center;
         }
         .state {
-          min-width: 45px;
+          min-width: 65px;
           text-align: end;
           margin-left: 5px;
         }
