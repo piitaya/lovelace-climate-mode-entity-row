@@ -3,6 +3,7 @@
   const css = LitElement.prototype.css;
 
   const defaultColors = {
+    auto: "#34c6eb",
     heat: "#FF8100",
     off: "#ef5350",
     away: "#90CAF9",
@@ -11,6 +12,7 @@
   };
 
   const defaultIcons = {
+    auto: "mdi:brightness-auto",
     heat: "mdi:fire",
     off: "mdi:power",
     away: "mdi:snowflake",
