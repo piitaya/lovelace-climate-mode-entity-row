@@ -54,7 +54,7 @@
     render() {
       const config = this._config;
       const hass = this._hass;
-      const stateObj = this.hass.states[this._config.entity];
+      const stateObj = this._hass.states[this._config.entity];
 
       if (!stateObj) {
         return html` <ha-card>Unknown entity: ${this._config.entity}</ha-card> `;
