@@ -54,12 +54,14 @@
     render() {
       const config = this._config;
       const hass = this._hass;
+      const stateObj = this.hass.states[this._config.entity];
 
       return html`
         <hui-generic-entity-row .hass="${hass}" .config="${config}">
           <div class="flex">
             ${config.modes.map((mode) => this.renderMode(mode))}
           </div>
+          <div>${stateObj.attributes.current_temperature || stateObj.entity_id}</div>
         </hui-generic-entity-row>
       `;
     }
