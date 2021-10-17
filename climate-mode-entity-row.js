@@ -56,6 +56,10 @@
       const hass = this._hass;
       const stateObj = this.hass.states[this._config.entity];
 
+      if (!stateObj) {
+        return html` <ha-card>Unknown entity: ${this._config.entity}</ha-card> `;
+      }
+
       return html`
         <hui-generic-entity-row .hass="${hass}" .config="${config}">
           <div class="flex">
