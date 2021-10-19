@@ -80,10 +80,14 @@
 
     renderMode(mode) {
       const isActive =
-        (!mode.preset_mode || mode.preset_mode === this.state.preset_mode) &&
-        (!mode.hvac_mode || mode.hvac_mode === this.state.hvac_mode) &&
-        (!mode.fan_mode || mode.fan_mode === this.state.fan_mode) &&
-        (!mode.swing_mode || mode.swing_mode === this.state.swing_mode);
+        (mode.preset_mode == null ||
+          mode.preset_mode === this.state.preset_mode) &&
+        (mode.hvac_mode == null || mode.hvac_mode === this.state.hvac_mode) &&
+        (mode.fan_mode == null || mode.fan_mode === this.state.fan_mode) &&
+        (mode.swing_mode == null ||
+          mode.swing_mode === this.state.swing_mode) &&
+        (mode.temperature == null ||
+          mode.temperature === this.state.temperature);
 
       const onClick = () => this.setMode(mode);
 
@@ -103,31 +107,44 @@
     }
 
     setMode(mode) {
-      if (mode.hvac_mode) {
+      if (mode.hvac_mode != null && mode.hvac_mode != this.state.hvac_mode) {
         this._hass.callService("climate", "set_hvac_mode", {
           entity_id: this._config.entity,
           hvac_mode: mode.hvac_mode,
         });
       }
 
-      if (mode.preset_mode) {
+      if (
+        mode.preset_mode != null &&
+        mode.preset_mode != this.state.preset_mode
+      ) {
         this._hass.callService("climate", "set_preset_mode", {
           entity_id: this._config.entity,
           preset_mode: mode.preset_mode,
         });
       }
 
-      if (mode.fan_mode) {
+      if (mode.fan_mode != null && mode.fan_mode != this.state.fan_mode) {
         this._hass.callService("climate", "set_fan_mode", {
           entity_id: this._config.entity,
           fan_mode: mode.fan_mode,
         });
       }
 
-      if (mode.swing_mode) {
+      if (mode.swing_mode != null && mode.swing_mode != this.state.swing_mode) {
         this._hass.callService("climate", "set_swing_mode", {
           entity_id: this._config.entity,
           swing_mode: mode.swing_mode,
+        });
+      }
+
+      if (
+        mode.temperature != null &&
+        mode.temperature != this.state.temperature
+      ) {
+        this._hass.callService("climate", "set_temperature", {
+          entity_id: this._config.entity,
+          temperature: mode.temperature,
         });
       }
     }
@@ -148,6 +165,7 @@
       const preset_mode = entity.attributes.preset_mode;
       const fan_mode = entity.attributes.fan_mode;
       const swing_mode = entity.attributes.swing_mode;
+      const temperature = entity.attributes.temperature;
 
       this.state = {
         entity,
@@ -155,6 +173,7 @@
         preset_mode,
         fan_mode,
         swing_mode,
+        temperature,
       };
     }
   }
