@@ -43,6 +43,7 @@ resources:
 | preset_mode | string | No       | A valid preset_mode for the entity    |
 | fan_mode    | string | No       | A valid fan_mode for the entity       |
 | swing_mode  | string | No       | A valid swing_mode for the entity     |
+| temperature | number | No       | A target temperature for the entity   |
 | color       | string | No       | Custom color for the icon when toggle |
 
 ## Example
@@ -85,9 +86,34 @@ entities:
         color: "#FFC107"
 ```
 
+### Temperature shortcuts
+
+If your thermostat entity does not support presets, you can directly define target temperature in the card
+
+![Temperature example](images/temperature_example.png)
+
+```yaml
+type: entities
+entities:
+  - entity: climate.heatpump
+    type: custom:climate-mode-entity-row
+    modes:
+      - hvac_mode: "off"
+        icon: "mdi:power"
+        color: "#ef5350"
+      - hvac_mode: "heat"
+        temperature: 19
+        icon: "mdi:leaf"
+        color: "#66bb6a"
+      - hvac_mode: "heat"
+        temperature: 21
+        icon: "mdi:fire"
+        color: "#FFC107"
+```
+
 ### Multi mode config
 
-You can combine or mix hvac_mode, preset_mode, fan_mode and swing_mode to build your custom controls.
+You can combine or mix hvac_mode, preset_mode, fan_mode, swing_mode and temperature to build your custom controls.
 
 ![Multi example](images/multi_example.png)
 
