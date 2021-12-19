@@ -73,7 +73,10 @@
         (mode.temperature == null ||
           mode.temperature === this.state.temperature);
 
-      const onClick = () => this.setMode(mode);
+      const onClick = (e) => {
+        e.stopPropagation();
+        this.setMode(mode);
+      }
 
       const defaultColor = defaultColors[mode.preset_mode || mode.hvac_mode];
       const defaultIcon = defaultIcons[mode.preset_mode || mode.hvac_mode];
