@@ -54,7 +54,7 @@
       const hass = this._hass;
 
       return html`
-        <hui-generic-entity-row .hass="${hass}" .config="${config}">
+        <hui-generic-entity-row .hass="${hass}" .config="${config}" .catchInteraction=${false}>
           <div class="flex">
             ${config.modes.map((mode) => this.renderMode(mode))}
           </div>
@@ -73,8 +73,7 @@
         (mode.temperature == null ||
           mode.temperature === this.state.temperature);
 
-      const onClick = (e) => {
-        e.stopPropagation();
+      const onClick = () => {
         this.setMode(mode);
       }
 
