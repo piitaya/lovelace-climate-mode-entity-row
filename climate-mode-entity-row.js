@@ -3,19 +3,37 @@
   const css = LitElement.prototype.css;
 
   const defaultColors = {
-    heat: "#FF8100",
+    auto: "#43a047",
+    cool: "#2b9af9",
+    dry: "#FFC107",
+    fan_only: "#B0BEC5",
+    heat: "#ff8100",
+    heat_cool: "#43a047",
     off: "#ef5350",
-    away: "#90CAF9",
     eco: "#66bb6a",
+    away: "#90CAF9",
+    boost: "#ef5350",
     comfort: "#FFC107",
+    home: "#ff8100",
+    sleep: "#9575CD",
+    activity: "#43a047"
   };
 
   const defaultIcons = {
+    auto: "mdi:calendar-sync",
+    cool: "mdi:snowflake",
+    dry: "mdi:water-percent",
+    fan_only: "mdi:fan",
     heat: "mdi:fire",
+    heat_cool: "mdi:autorenew",
     off: "mdi:power",
     away: "mdi:snowflake",
     eco: "mdi:leaf",
+    boost: "mdi:rocket-launch",
     comfort: "mdi:weather-sunny",
+    home: "mdi:home",
+    sleep: "mdi:moon-waning-crescent",
+    activity: "mdi:motion-sensor"
   };
 
   class ClimateModeEntity extends LitElement {
